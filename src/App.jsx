@@ -502,6 +502,8 @@ const buttonStyle = {
   padding: "10px 0",
   border: "1px solid #999",
   background: "#fff",
+  color: "#111",
+  fontWeight: 600,
   cursor: "pointer",
 };
 
@@ -509,5 +511,7 @@ const smallButtonStyle = {
   padding: "6px 14px",
   border: "1px solid #999",
   background: "#fff",
+  color: "#111",
+  fontWeight: 600,
   cursor: "pointer",
 };
