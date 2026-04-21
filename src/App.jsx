@@ -12,12 +12,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "請貼上你的 apiKey",
-  authDomain: "請貼上你的 authDomain",
-  projectId: "請貼上你的 projectId",
-  storageBucket: "請貼上你的 storageBucket",
-  messagingSenderId: "請貼上你的 messagingSenderId",
-  appId: "請貼上你的 appId",
+  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
+  authDomain: "pikmin-mushroom-record.firebaseapp.com",
+  projectId: "pikmin-mushroom-record",
+  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
+  messagingSenderId: "742213673504",
+  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
 };
 
 function getNow() {
