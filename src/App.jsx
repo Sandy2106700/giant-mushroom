@@ -96,6 +96,7 @@ export default function App() {
   const [editingId, setEditingId] = useState("");
   const [opener, setOpener] = useState("");
   const [form, setForm] = useState(emptyForm);
+  const [originalEndTime, setOriginalEndTime] = useState(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -176,6 +177,22 @@ export default function App() {
     const totalMinutes = days * 24 * 60 + hours * 60 + minutes;
     const now = getNow();
 
+    let nextEndTime = null;
+
+    if (editingId) {
+      const originalTotalMinutes = originalEndTime && originalEndTime > now
+        ? Math.floor((originalEndTime - now) / 60000)
+        : 0;
+
+      if (totalMinutes === originalTotalMinutes) {
+        nextEndTime = originalEndTime ?? null;
+      } else {
+        nextEndTime = totalMinutes > 0 ? now + totalMinutes * 60 * 1000 : null;
+      }
+    } else {
+      nextEndTime = totalMinutes > 0 ? now + totalMinutes * 60 * 1000 : null;
+    }
+
     const payload = {
       reporter: openerValue,
       spotName: spotValue,
@@ -183,7 +200,7 @@ export default function App() {
       note: noteValue,
       megaphone: form.mega,
       createdAt: now,
-      endTime: totalMinutes > 0 ? now + totalMinutes * 60 * 1000 : null,
+      endTime: nextEndTime,
     };
 
     try {
@@ -198,6 +215,7 @@ export default function App() {
       }
 
       setEditingId("");
+      setOriginalEndTime(null);
       setOpener("");
       setForm(emptyForm);
     } catch (error) {
@@ -222,6 +240,7 @@ export default function App() {
 
   function handleEdit(item) {
     setEditingId(item.id);
+    setOriginalEndTime(item.endTime ?? null);
     setOpener(item.reporter === "未填寫" ? "" : item.reporter || "");
 
     let days = "0";
@@ -251,6 +270,7 @@ export default function App() {
 
   function cancelEdit() {
     setEditingId("");
+    setOriginalEndTime(null);
     setOpener("");
     setForm(emptyForm);
     setStatus("已取消修改");
