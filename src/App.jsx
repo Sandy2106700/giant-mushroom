@@ -13,12 +13,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
-  authDomain: "pikmin-mushroom-record.firebaseapp.com",
-  projectId: "pikmin-mushroom-record",
-  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
-  messagingSenderId: "742213673504",
-  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
+  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
+  authDomain: "pikmin-mushroom-record.firebaseapp.com",
+  projectId: "pikmin-mushroom-record",
+  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
+  messagingSenderId: "742213673504",
+  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
 };
 
 function getNow() {
@@ -494,7 +494,7 @@ export default function App() {
                       ⏳ 剩餘時間：{left === null ? "未設定" : formatCountdown(left)}
                     </div>
 
-                    <div style={{ textAlign: "left", lineHeight: 1.6, fontSize: 14 }}>
+                    <div style={{ textAlign: "left", lineHeight: 1.5, fontSize: 10 }}>
                       <div style={{ fontWeight: "bold", fontSize: 16 }}>📍 {item.spotName}</div>
                       <div>👤 開菇人：{item.reporter}</div>
                       <div>🧭 座標：{item.coord}</div>
@@ -568,7 +568,7 @@ export default function App() {
                       ⏳ 剩餘時間：已結束
                     </div>
 
-                    <div style={{ textAlign: "left", lineHeight: 1.6, fontSize: 14 }}>
+                    <div style={{ textAlign: "left", lineHeight: 1.5, fontSize: 10 }}>
                       <div style={{ fontWeight: "bold", fontSize: 16 }}>📍 {item.spotName}</div>
                       <div>👤 開菇人：{item.reporter}</div>
                       <div>🧭 座標：{item.coord}</div>
