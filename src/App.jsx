@@ -13,12 +13,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
-  authDomain: "pikmin-mushroom-record.firebaseapp.com",
-  projectId: "pikmin-mushroom-record",
-  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
-  messagingSenderId: "742213673504",
-  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
+  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
+  authDomain: "pikmin-mushroom-record.firebaseapp.com",
+  projectId: "pikmin-mushroom-record",
+  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
+  messagingSenderId: "742213673504",
+  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
 };
 
 function getNow() {
