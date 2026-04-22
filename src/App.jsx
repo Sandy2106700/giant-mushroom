@@ -36,6 +36,13 @@ function formatCountdown(ms) {
   return `${days}天 ${hours}小時 ${minutes}分`;
 }
 
+function getCountdownColor(ms) {
+  if (ms <= 0) return "#999";
+  if (ms <= 60 * 60 * 1000) return "#d32f2f";
+  if (ms <= 3 * 60 * 60 * 1000) return "#f57c00";
+  return "#333";
+}
+
 function initFirebase() {
   const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
   const db = getFirestore(app);
@@ -268,18 +275,10 @@ export default function App() {
                 📍 {item.spotName}
               </div>
 
-              <div style={{ fontSize:14 }}>
-                👤 {item.reporter}
-              </div>
-              <div style={{ fontSize:14 }}>
-                🧭 {item.coord}
-              </div>
-              <div style={{ fontSize:14 }}>
-                📢 {item.megaphone ? "有":"無"}
-              </div>
-              <div style={{ fontSize:14 }}>
-                📝 {item.note || "無"}
-              </div>
+              <div style={{ fontSize:14 }}>👤 {item.reporter}</div>
+              <div style={{ fontSize:14 }}>🧭 {item.coord}</div>
+              <div style={{ fontSize:14 }}>📢 {item.megaphone ? "有":"無"}</div>
+              <div style={{ fontSize:14 }}>📝 {item.note || "無"}</div>
 
               <button onClick={()=>handleEdit(item)}>修改</button>
               <button onClick={()=>fb.remove(item.id)}>刪除</button>
