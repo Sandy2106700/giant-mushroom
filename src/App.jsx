@@ -422,7 +422,7 @@ export default function App() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          gridTemplateColumns: window.innerWidth < 600 ? "1fr" : "1fr 1fr",
           gap: 12,
           marginBottom: 16,
         }}
@@ -438,7 +438,7 @@ export default function App() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          gridTemplateColumns: window.innerWidth < 600 ? "1fr" : "1fr 1fr",
           gap: 24,
           alignItems: "start",
         }}
