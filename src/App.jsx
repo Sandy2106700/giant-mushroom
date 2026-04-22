@@ -294,7 +294,7 @@ export default function App() {
         color: "#333",
       }}
     >
-      <h1 style={{ textAlign: "center", marginBottom: 24 }}>巨菇紀錄</h1>
+      <h1 style={{ textAlign: "center", marginBottom: 24 }}>巨菇共用板</h1>
 
       <div style={{ display: "grid", gap: 12 }}>
         <input
@@ -472,9 +472,10 @@ export default function App() {
                         right: 12,
                         zIndex: 2,
                         background: "rgba(255,255,255,0.8)",
-                        padding: "2px 6px",
-                        borderRadius: 6,
+                        padding: "1px 5px",
+                        borderRadius: 5,
                         fontWeight: "bold",
+                        fontSize: 12,
                         color: "#666",
                       }}
                     >
@@ -545,9 +546,10 @@ export default function App() {
                         right: 12,
                         zIndex: 2,
                         background: "rgba(255,255,255,0.8)",
-                        padding: "2px 6px",
-                        borderRadius: 6,
+                        padding: "1px 5px",
+                        borderRadius: 5,
                         fontWeight: "bold",
+                        fontSize: 12,
                         color: "#666",
                       }}
                     >
