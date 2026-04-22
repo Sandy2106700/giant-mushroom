@@ -188,9 +188,10 @@ export default function App() {
     let nextEndTime = null;
 
     if (editingId) {
-      const originalTotalMinutes = originalEndTime && originalEndTime > now
-        ? Math.floor((originalEndTime - now) / 60000)
-        : 0;
+      const originalTotalMinutes =
+        originalEndTime && originalEndTime > now
+          ? Math.floor((originalEndTime - now) / 60000)
+          : 0;
 
       if (totalMinutes === originalTotalMinutes) {
         nextEndTime = originalEndTime ?? null;
@@ -461,15 +462,19 @@ export default function App() {
                       position: "relative",
                       border: "1px solid #ccc",
                       borderRadius: 12,
-                      padding: 16,
+                      padding: "28px 16px 16px 16px",
                       background: "#fafafa",
                     }}
                   >
                     <div
                       style={{
                         position: "absolute",
-                        top: 12,
-                        right: 16,
+                        top: 8,
+                        right: 12,
+                        zIndex: 2,
+                        background: "rgba(255,255,255,0.8)",
+                        padding: "2px 6px",
+                        borderRadius: 6,
                         fontWeight: "bold",
                         color: "#666",
                       }}
@@ -530,15 +535,19 @@ export default function App() {
                       position: "relative",
                       border: "1px solid #ccc",
                       borderRadius: 12,
-                      padding: 16,
+                      padding: "28px 16px 16px 16px",
                       background: "#f3f3f3",
                     }}
                   >
                     <div
                       style={{
                         position: "absolute",
-                        top: 12,
-                        right: 16,
+                        top: 8,
+                        right: 12,
+                        zIndex: 2,
+                        background: "rgba(255,255,255,0.8)",
+                        padding: "2px 6px",
+                        borderRadius: 6,
                         fontWeight: "bold",
                         color: "#666",
                       }}
