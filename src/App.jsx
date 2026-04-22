@@ -139,6 +139,14 @@ export default function App() {
     });
   }, [list]);
 
+  const activeList = useMemo(() => {
+    return sortedList.filter((item) => !item.endTime || item.endTime > tick);
+  }, [sortedList, tick]);
+
+  const endedList = useMemo(() => {
+    return sortedList.filter((item) => item.endTime && item.endTime <= tick);
+  }, [sortedList, tick]);
+
   async function handleAdd() {
     const openerValue = opener.trim() || "未填寫";
     const spotValue = form.spot.trim() || "未命名菇點";
@@ -414,75 +422,146 @@ export default function App() {
         巨菇數量：{sortedList.length}
       </div>
 
-      <div style={{ display: "grid", gap: 16 }}>
-        {sortedList.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#888" }}>目前還沒有資料</div>
-        ) : (
-          sortedList.map((item, index) => {
-            const left = item.endTime ? item.endTime - tick : null;
+      <div style={{ display: "grid", gap: 24 }}>
+        <div>
+          <div style={{ fontWeight: "bold", fontSize: 20, marginBottom: 12 }}>
+            未結束（{activeList.length}）
+          </div>
 
-            return (
-              <div
-                key={item.id}
-                style={{
-                  position: "relative",
-                  border: "1px solid #ccc",
-                  borderRadius: 12,
-                  padding: 16,
-                  background: "#fafafa",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 12,
-                    right: 16,
-                    fontWeight: "bold",
-                    color: "#666",
-                  }}
-                >
-                  #{index + 1}
-                </div>
+          <div style={{ display: "grid", gap: 16 }}>
+            {activeList.length === 0 ? (
+              <div style={{ textAlign: "center", color: "#888" }}>目前沒有未結束資料</div>
+            ) : (
+              activeList.map((item, index) => {
+                const left = item.endTime ? item.endTime - tick : null;
 
-                <div
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: 18,
-                    marginBottom: 10,
-                    color: left === null ? "#666" : getCountdownColor(left),
-                    textAlign: "center",
-                  }}
-                >
-                  ⏳ 剩餘時間：{left === null ? "未設定" : formatCountdown(left)}
-                </div>
-
-                <div style={{ textAlign: "left", lineHeight: 1.8 }}>
-                  <div style={{ fontWeight: "bold", fontSize: 18 }}>📍 {item.spotName}</div>
-                  <div>👤 開菇人：{item.reporter}</div>
-                  <div>🧭 座標：{item.coord}</div>
-                  <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
-                  <div>📝 備註：{item.note ? item.note : "無"}</div>
-                </div>
-
-                <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
-                  <button
-                    onClick={() => handleEdit(item)}
-                    style={smallButtonStyle}
+                return (
+                  <div
+                    key={item.id}
+                    style={{
+                      position: "relative",
+                      border: "1px solid #ccc",
+                      borderRadius: 12,
+                      padding: 16,
+                      background: "#fafafa",
+                    }}
                   >
-                    修改
-                  </button>
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 12,
+                        right: 16,
+                        fontWeight: "bold",
+                        color: "#666",
+                      }}
+                    >
+                      #{index + 1}
+                    </div>
 
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    style={smallButtonStyle}
+                    <div
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: 18,
+                        marginBottom: 10,
+                        color: left === null ? "#666" : getCountdownColor(left),
+                        textAlign: "center",
+                      }}
+                    >
+                      ⏳ 剩餘時間：{left === null ? "未設定" : formatCountdown(left)}
+                    </div>
+
+                    <div style={{ textAlign: "left", lineHeight: 1.8 }}>
+                      <div style={{ fontWeight: "bold", fontSize: 18 }}>📍 {item.spotName}</div>
+                      <div>👤 開菇人：{item.reporter}</div>
+                      <div>🧭 座標：{item.coord}</div>
+                      <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
+                      <div>📝 備註：{item.note ? item.note : "無"}</div>
+                    </div>
+
+                    <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+                      <button onClick={() => handleEdit(item)} style={smallButtonStyle}>
+                        修改
+                      </button>
+
+                      <button onClick={() => handleDelete(item.id)} style={smallButtonStyle}>
+                        刪除
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
+
+        <div>
+          <div style={{ fontWeight: "bold", fontSize: 20, marginBottom: 12 }}>
+            已結束（{endedList.length}）
+          </div>
+
+          <div style={{ display: "grid", gap: 16 }}>
+            {endedList.length === 0 ? (
+              <div style={{ textAlign: "center", color: "#888" }}>目前沒有已結束資料</div>
+            ) : (
+              endedList.map((item, index) => {
+                return (
+                  <div
+                    key={item.id}
+                    style={{
+                      position: "relative",
+                      border: "1px solid #ccc",
+                      borderRadius: 12,
+                      padding: 16,
+                      background: "#f3f3f3",
+                    }}
                   >
-                    刪除
-                  </button>
-                </div>
-              </div>
-            );
-          })
-        )}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 12,
+                        right: 16,
+                        fontWeight: "bold",
+                        color: "#666",
+                      }}
+                    >
+                      #{index + 1}
+                    </div>
+
+                    <div
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: 18,
+                        marginBottom: 10,
+                        color: "#888",
+                        textAlign: "center",
+                      }}
+                    >
+                      ⏳ 剩餘時間：已結束
+                    </div>
+
+                    <div style={{ textAlign: "left", lineHeight: 1.8 }}>
+                      <div style={{ fontWeight: "bold", fontSize: 18 }}>📍 {item.spotName}</div>
+                      <div>👤 開菇人：{item.reporter}</div>
+                      <div>🧭 座標：{item.coord}</div>
+                      <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
+                      <div>📝 備註：{item.note ? item.note : "無"}</div>
+                    </div>
+
+                    <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+                      <button onClick={() => handleEdit(item)} style={smallButtonStyle}>
+                        修改
+                      </button>
+
+                      <button onClick={() => handleDelete(item.id)} style={smallButtonStyle}>
+                        刪除
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
