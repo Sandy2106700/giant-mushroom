@@ -13,12 +13,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
-  authDomain: "pikmin-mushroom-record.firebaseapp.com",
-  projectId: "pikmin-mushroom-record",
-  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
-  messagingSenderId: "742213673504",
-  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
+  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
+  authDomain: "pikmin-mushroom-record.firebaseapp.com",
+  projectId: "pikmin-mushroom-record",
+  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
+  messagingSenderId: "742213673504",
+  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
 };
 
 function getNow() {
@@ -443,7 +443,7 @@ export default function App() {
         }}
       >
         <div>
-          <div style={{ fontWeight: "bold", fontSize: 20, marginBottom: 12 }}>
+          <div style={{ fontWeight: "bold", fontSize: 18, marginBottom: 12 }}>
             未結束
           </div>
 
@@ -485,7 +485,7 @@ export default function App() {
                     <div
                       style={{
                         fontWeight: "bold",
-                        fontSize: 18,
+                        fontSize: 16,
                         marginBottom: 10,
                         color: left === null ? "#666" : getCountdownColor(left),
                         textAlign: "center",
@@ -494,8 +494,8 @@ export default function App() {
                       ⏳ 剩餘時間：{left === null ? "未設定" : formatCountdown(left)}
                     </div>
 
-                    <div style={{ textAlign: "left", lineHeight: 1.8 }}>
-                      <div style={{ fontWeight: "bold", fontSize: 18 }}>📍 {item.spotName}</div>
+                    <div style={{ textAlign: "left", lineHeight: 1.6, fontSize: 14 }}>
+                      <div style={{ fontWeight: "bold", fontSize: 16 }}>📍 {item.spotName}</div>
                       <div>👤 開菇人：{item.reporter}</div>
                       <div>🧭 座標：{item.coord}</div>
                       <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
@@ -519,7 +519,7 @@ export default function App() {
         </div>
 
         <div>
-          <div style={{ fontWeight: "bold", fontSize: 20, marginBottom: 12 }}>
+          <div style={{ fontWeight: "bold", fontSize: 18, marginBottom: 12 }}>
             已結束
           </div>
 
@@ -559,7 +559,7 @@ export default function App() {
                     <div
                       style={{
                         fontWeight: "bold",
-                        fontSize: 18,
+                        fontSize: 16,
                         marginBottom: 10,
                         color: "#888",
                         textAlign: "center",
@@ -568,8 +568,8 @@ export default function App() {
                       ⏳ 剩餘時間：已結束
                     </div>
 
-                    <div style={{ textAlign: "left", lineHeight: 1.8 }}>
-                      <div style={{ fontWeight: "bold", fontSize: 18 }}>📍 {item.spotName}</div>
+                    <div style={{ textAlign: "left", lineHeight: 1.6, fontSize: 14 }}>
+                      <div style={{ fontWeight: "bold", fontSize: 16 }}>📍 {item.spotName}</div>
                       <div>👤 開菇人：{item.reporter}</div>
                       <div>🧭 座標：{item.coord}</div>
                       <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
