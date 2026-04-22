@@ -418,14 +418,33 @@ export default function App() {
 
       <hr style={{ margin: "24px 0" }} />
 
-      <div style={{ textAlign: "right", marginBottom: 10, fontWeight: "bold" }}>
-        巨菇數量：{sortedList.length}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 12,
+          marginBottom: 16,
+        }}
+      >
+        <div style={{ textAlign: "left", fontWeight: "bold" }}>
+          未結束巨菇數量：{activeList.length}
+        </div>
+        <div style={{ textAlign: "right", fontWeight: "bold" }}>
+          已結束巨菇數量：{endedList.length}
+        </div>
       </div>
 
-      <div style={{ display: "grid", gap: 24 }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 24,
+          alignItems: "start",
+        }}
+      >
         <div>
           <div style={{ fontWeight: "bold", fontSize: 20, marginBottom: 12 }}>
-            未結束（{activeList.length}）
+            未結束
           </div>
 
           <div style={{ display: "grid", gap: 16 }}>
@@ -496,7 +515,7 @@ export default function App() {
 
         <div>
           <div style={{ fontWeight: "bold", fontSize: 20, marginBottom: 12 }}>
-            已結束（{endedList.length}）
+            已結束
           </div>
 
           <div style={{ display: "grid", gap: 16 }}>
