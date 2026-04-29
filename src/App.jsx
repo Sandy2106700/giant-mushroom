@@ -104,10 +104,11 @@ function initFirebase() {
 const emptyForm = {
   spot: "",
   coord: "",
+  mushroomType: "",
   note: "",
-  days: "0",
-  hours: "0",
-  minutes: "0",
+  days: "",
+  hours: "",
+  minutes: "",
   mega: false,
   invaded: false,
 };
@@ -176,6 +177,7 @@ export default function App() {
     const openerValue = opener.trim() || "未填寫";
     const spotValue = form.spot.trim() || "未命名菇點";
     const coordValue = form.coord.trim() || "未填寫";
+    const mushroomTypeValue = form.mushroomType.trim() || "未填寫";
     const noteValue = form.note.trim() || "";
 
     const days = Number(form.days || 0);
@@ -231,6 +233,7 @@ export default function App() {
       reporter: openerValue,
       spotName: spotValue,
       coord: coordValue,
+      mushroomType: mushroomTypeValue,
       note: noteValue,
       megaphone: form.mega,
       invaded: form.invaded,
@@ -278,9 +281,9 @@ export default function App() {
     setOriginalEndTime(item.endTime ?? null);
     setOpener(item.reporter === "未填寫" ? "" : item.reporter || "");
 
-    let days = "0";
-    let hours = "0";
-    let minutes = "0";
+    let days = "";
+    let hours = "";
+    let minutes = "";
 
     if (item.endTime && item.endTime > getNow()) {
       const totalMinutes = Math.floor((item.endTime - getNow()) / 60000);
@@ -292,6 +295,7 @@ export default function App() {
     setForm({
       spot: item.spotName === "未命名菇點" ? "" : item.spotName || "",
       coord: item.coord === "未填寫" ? "" : item.coord || "",
+      mushroomType: item.mushroomType === "未填寫" ? "" : item.mushroomType || "",
       note: item.note || "",
       days,
       hours,
@@ -347,6 +351,13 @@ export default function App() {
         />
 
         <input
+          placeholder="蘑菇種類"
+          value={form.mushroomType}
+          onChange={(e) => setForm({ ...form, mushroomType: e.target.value })}
+          style={inputStyle}
+        />
+
+        <input
           placeholder="備註（可不填）"
           value={form.note}
           onChange={(e) => setForm({ ...form, note: e.target.value })}
@@ -381,7 +392,7 @@ export default function App() {
             placeholder="小時"
             value={form.hours}
             onChange={(e) => setForm({ ...form, hours: e.target.value })}
-            style={{ ...inputStyle, width: 90, textAlign: "center", marginBottom: 0 }}
+            style={{ ...inputStyle, width: 80, textAlign: "center", marginBottom: 0 }}
           />
           <span>小時</span>
 
@@ -539,6 +550,7 @@ export default function App() {
 
                     <div style={{ textAlign: "left", lineHeight: 1.5, fontSize: 14 }}>
                       <div style={{ fontWeight: "bold", fontSize: 14 }}>📍 {item.spotName}</div>
+                      <div>🍄 蘑菇種類：{item.mushroomType ? item.mushroomType : "未填寫"}</div>
                       <div>👤 開菇人：{item.reporter}</div>
                       <div>🧭 座標：{item.coord}</div>
                       <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
@@ -614,6 +626,7 @@ export default function App() {
 
                     <div style={{ textAlign: "left", lineHeight: 1.5, fontSize: 14 }}>
                       <div style={{ fontWeight: "bold", fontSize: 14 }}>📍 {item.spotName}</div>
+                      <div>🍄 蘑菇種類：{item.mushroomType ? item.mushroomType : "未填寫"}</div>
                       <div>👤 開菇人：{item.reporter}</div>
                       <div>🧭 座標：{item.coord}</div>
                       <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
