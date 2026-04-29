@@ -13,12 +13,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
-  authDomain: "pikmin-mushroom-record.firebaseapp.com",
-  projectId: "pikmin-mushroom-record",
-  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
-  messagingSenderId: "742213673504",
-  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
+  apiKey: "AIzaSyCwTB0Rn-jLk3KahCBox0NLbno7ZgvW3Oo",
+  authDomain: "pikmin-mushroom-record.firebaseapp.com",
+  projectId: "pikmin-mushroom-record",
+  storageBucket: "pikmin-mushroom-record.firebasestorage.app",
+  messagingSenderId: "742213673504",
+  appId: "1:742213673504:web:1e1fcb9962ca846af91245",
 };
 
 function getNow() {
@@ -34,6 +34,30 @@ function formatCountdown(ms) {
   const minutes = totalMinutes % 60;
 
   return `${days}天 ${hours}小時 ${minutes}分`;
+}
+
+function formatEndTime(ts) {
+  if (!ts) return "未設定";
+
+  const d = new Date(ts);
+  const now = new Date();
+
+  const sameDay =
+    d.getFullYear() === now.getFullYear() &&
+    d.getMonth() === now.getMonth() &&
+    d.getDate() === now.getDate();
+
+  const hours = String(d.getHours()).padStart(2, "0");
+  const minutes = String(d.getMinutes()).padStart(2, "0");
+
+  if (sameDay) {
+    return `${hours}:${minutes}`;
+  }
+
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const date = String(d.getDate()).padStart(2, "0");
+
+  return `${month}/${date} ${hours}:${minutes}`;
 }
 
 function getCountdownColor(ms) {
@@ -85,6 +109,7 @@ const emptyForm = {
   hours: "0",
   minutes: "0",
   mega: false,
+  invaded: false,
 };
 
 export default function App() {
@@ -208,6 +233,7 @@ export default function App() {
       coord: coordValue,
       note: noteValue,
       megaphone: form.mega,
+      invaded: form.invaded,
       createdAt: now,
       endTime: nextEndTime,
     };
@@ -271,6 +297,7 @@ export default function App() {
       hours,
       minutes,
       mega: Boolean(item.megaphone),
+      invaded: Boolean(item.invaded),
     });
 
     setStatus("正在修改這筆資料");
@@ -386,6 +413,22 @@ export default function App() {
           有開大聲公
         </label>
 
+        <label
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 16,
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={form.invaded}
+            onChange={(e) => setForm({ ...form, invaded: e.target.checked })}
+          />
+          有被入侵
+        </label>
+
         <div style={{ display: "flex", gap: 10 }}>
           <button
             onClick={handleAdd}
@@ -487,11 +530,11 @@ export default function App() {
                         fontWeight: "bold",
                         fontSize: 16,
                         marginBottom: 10,
-                        color: left === null ? "#666" : getCountdownColor(left),
+                        color: item.endTime ? getCountdownColor(left) : "#666",
                         textAlign: "center",
                       }}
                     >
-                      ⏳ 剩餘時間：{left === null ? "未設定" : formatCountdown(left)}
+                      ⏰ 結束時間：{formatEndTime(item.endTime)}
                     </div>
 
                     <div style={{ textAlign: "left", lineHeight: 1.5, fontSize: 14 }}>
@@ -499,6 +542,8 @@ export default function App() {
                       <div>👤 開菇人：{item.reporter}</div>
                       <div>🧭 座標：{item.coord}</div>
                       <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
+                      <div>⏳ 剩餘時間：{left === null ? "未設定" : formatCountdown(left)}</div>
+                      <div>🛡️ 被入侵：{item.invaded ? "有" : "無"}</div>
                       <div>📝 備註：{item.note ? item.note : "無"}</div>
                     </div>
 
@@ -564,7 +609,7 @@ export default function App() {
                         textAlign: "center",
                       }}
                     >
-                      ⏳ 剩餘時間：已結束
+                      ⏰ 結束時間：{formatEndTime(item.endTime)}
                     </div>
 
                     <div style={{ textAlign: "left", lineHeight: 1.5, fontSize: 14 }}>
@@ -572,6 +617,8 @@ export default function App() {
                       <div>👤 開菇人：{item.reporter}</div>
                       <div>🧭 座標：{item.coord}</div>
                       <div>📢 大聲公：{item.megaphone ? "有" : "無"}</div>
+                      <div>⏳ 剩餘時間：已結束</div>
+                      <div>🛡️ 被入侵：{item.invaded ? "有" : "無"}</div>
                       <div>📝 備註：{item.note ? item.note : "無"}</div>
                     </div>
 
